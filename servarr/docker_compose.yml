@@ -16,6 +16,22 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
+  sonarr4k:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr4k
+    network_mode: bridge
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Australia/Melbourne
+      - UMASK=002
+    volumes:
+      - /docker/sonarr4k:/config
+      - /media:/media #optional
+      - /downloads:/downloads #optional
+    ports:
+      - 8989:8989
+    restart: unless-stopped    
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
@@ -32,8 +48,25 @@ services:
     ports:
       - 7878:7878
     restart: unless-stopped
+  radarr4k:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr4k
+    network_mode: bridge
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Australia/Melbourne
+      - UMASK=002
+    volumes:
+      - /docker/radarr4k:/config
+      - /media:/media #optional
+      - /downloads:/downloads #optional
+    ports:
+      - 7878:7879
+    restart: unless-stopped    
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
     network_mode: bridge
     environment:
       - PUID=0
@@ -49,6 +82,7 @@ services:
     restart: unless-stopped
   sportarr:
     image: sportarr/sportarr:latest
+    container_name: sportarr
     network_mode: bridge
     environment:
       - PUID=0
