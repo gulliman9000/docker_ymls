@@ -105,6 +105,7 @@ services:
       - PUID=0
       - PGID=0
       - LOG_LEVEL=debug
+      - PORT=5055
       - TZ=Australia/Melbourne
     ports:
       - 5055:5055
