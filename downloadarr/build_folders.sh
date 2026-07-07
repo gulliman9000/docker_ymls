@@ -8,7 +8,7 @@ COMPOSE_URL="https://raw.githubusercontent.com/gulliman9000/docker_ymls/main/dow
 
 echo "Creating directory structure..."
 
-mkdir -p "$BASE_DIR"/{sabnzbd,prowlarr,qbittorrent,pinchflat,huntarr,slskd,ytdlp}
+mkdir -p "$BASE_DIR"/{sabnzbd,prowlarr,qbittorrent,pinchflat,slskd,ytdlp}
 
 echo "Downloading docker-compose.yml..."
 

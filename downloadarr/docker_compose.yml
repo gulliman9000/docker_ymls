@@ -63,18 +63,6 @@ services:
       - /media/youtube:/downloads
     restart: unless-stopped
 
-  huntarr:
-    image: huntarr/huntarr:latest
-    container_name: huntarr
-    network_mode: bridge
-    restart: always
-    ports:
-      - "9705:9705"
-    volumes:
-      - /docker/huntarr:/config
-    environment:
-      - TZ=Australia/Melbourne       
-
   slskd:
     image: slskd/slskd
     container_name: slskd
