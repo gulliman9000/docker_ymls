@@ -90,6 +90,9 @@ services:
       - "5031:5031"
       - "50300:50300"
     environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Australia/Melbourne
       - SLSKD_REMOTE_CONFIGURATION=true
     volumes:
       - /docker/slskd:/app
@@ -101,7 +104,11 @@ services:
   yt-dlp-webui:
     image: marcobaobao/yt-dlp-webui
     container_name: yt-dlp-webui
-    network_mode: bridge        
+    network_mode: bridge
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Australia/Melbourne        
     ports:
       - 3033:3033
     volumes:
