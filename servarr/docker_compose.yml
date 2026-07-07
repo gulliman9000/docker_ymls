@@ -8,7 +8,7 @@ services:
       - PUID=0
       - PGID=0
       - TZ=Australia/Melbourne
-      -	UMASK=002
+      - UMASK=002
     volumes:
       - /docker/sonarr:/config
       - /media:/media #optional
@@ -24,7 +24,7 @@ services:
       - PUID=0
       - PGID=0
       - TZ=Australia/Melbourne
-      -	UMASK=002
+      - UMASK=002
     volumes:
       - /docker/radarr:/config
       - /media:/media #optional
@@ -39,7 +39,7 @@ services:
       - PUID=0
       - PGID=0
       - TZ=Australia/Melbourne
-      -	UMASK=002
+      - UMASK=002
     volumes:
       - /docker/lidarr:/config
       - /media:/media #optional
@@ -54,7 +54,7 @@ services:
       - PUID=0
       - PGID=0
       - TZ=Australia/Melbourne
-      -	UMASK=002
+      - UMASK=002
     volumes:
       - /docker/sportarr:/config
       - /media/Sportsing:/data #optional
