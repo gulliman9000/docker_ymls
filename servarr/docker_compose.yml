@@ -1,0 +1,64 @@
+---
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    network_mode: bridge
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Australia/Melbourne
+      -	UMASK=002
+    volumes:
+      - /docker/sonarr:/config
+      - /media:/media #optional
+      - /downloads:/downloads #optional
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    network_mode: bridge
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Australia/Melbourne
+      -	UMASK=002
+    volumes:
+      - /docker/radarr:/config
+      - /media:/media #optional
+      - /downloads:/downloads #optional
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    network_mode: bridge
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Australia/Melbourne
+      -	UMASK=002
+    volumes:
+      - /docker/lidarr:/config
+      - /media:/media #optional
+      - /downloads:/downloads #optional
+    ports:
+      - 8686:8686
+    restart: unless-stopped
+  sportarr:
+    image: sportarr/sportarr:latest
+    network_mode: bridge
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Australia/Melbourne
+      -	UMASK=002
+    volumes:
+      - /docker/sportarr:/config
+      - /media/Sportsing:/data #optional
+      - /downloads:/downloads #optional
+    ports:
+      - 1867:1867
+    restart: unless-stopped
