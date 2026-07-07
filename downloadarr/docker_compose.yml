@@ -63,6 +63,24 @@ services:
       - /media/youtube:/downloads
     restart: unless-stopped
 
+  soularr:
+    image: mrusse08/soularr:latest
+    container_name: soularr
+    hostname: soularr
+    network_mode: bridge
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Australia/Melbourne
+      - SCRIPT_INTERVAL=300 # Script interval in seconds
+    volumes:
+        # "You can set /downloads to whatever you want but will then need to change the Slskd download dir in your config file"
+        - /downloads/slskd:/downloads
+        # Select where you are storing your config file.
+        # Leave "/data" since thats where the script expects the config file to be
+        - /docker/soularr:/data
+    restart: unless-stopped    
+
   slskd:
     image: slskd/slskd
     container_name: slskd
@@ -75,6 +93,7 @@ services:
       - SLSKD_REMOTE_CONFIGURATION=true
     volumes:
       - /docker/slskd:/app
+      - /media:/data
     restart: always
 
   yt-dlp-webui:
