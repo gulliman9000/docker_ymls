@@ -103,10 +103,7 @@ services:
     network_mode: bridge
     environment:
       - LOG_LEVEL=debug
-      - PUID=0
-      - PGID=0
       - TZ=Australia/Melbourne
-      - UMASK=002
     ports:
       - 5055:5055
     volumes:
@@ -121,6 +118,7 @@ services:
   musicseerr:
     image: ghcr.io/habirabbu/musicseerr:latest
     container_name: musicseerr
+    network_mode: bridge
     environment:
       - LOG_LEVEL=debug
       - PUID=0
@@ -143,4 +141,33 @@ services:
       interval: 30s
       timeout: 10s
       start_period: 15s
-      retries: 3    
+      retries: 3
+
+  umlautadaptarr:
+    image: pcjones/umlautadaptarr:latest
+    container_name: umlautadaptarr
+    network_mode: bridge    
+    restart: unless-stopped
+    ports:
+      - "5006:5006" # can be removed if you use the alternative, non-proxy configuration
+    environment:
+      - TZ=Australia/Melbourne
+      - SONARR__0__NAME=Sonarr
+      - SONARR__0__ENABLED=false
+      - SONARR__0__HOST=http://localhost:8989
+      - SONARR__0__APIKEY=9fd7ee6606f84db990710984bfb7971e
+      - SONARR__1__NAME=Sonarr4k      
+      - SONARR__1__ENABLED=e049d4b6864f44f3a1a2fecab3a29aff
+      - SONARR__1__HOST=http://localhost:8990
+      - SONARR__1__APIKEY=APIKEY  
+      - RADARR__0__NAME=Radarr   
+      - RADARR__0__ENABLED=false
+      - RADARR__0__HOST=http://localhost:7878
+      - RADARR__0__APIKEY=b8a38b528fdc47ea9480d6b687dab773
+      - RADARR__1__NAME=Radarr   
+      - RADARR__1__ENABLED=false
+      - RADARR__1__HOST=http://localhost:7878
+      - RADARR__1__APIKEY=b8a38b528fdc47ea9480d6b687dab773      
+      - LIDARR__ENABLED=false
+      - LIDARR__HOST=http://localhost:8686
+      - LIDARR__APIKEY=1d876d29ed354d8b9153338b292943e7
