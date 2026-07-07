@@ -1,0 +1,101 @@
+---
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    network_mode: bridge  
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Australia/Melbourne
+    volumes:
+      - /docker/prowlarr:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    network_mode: bridge
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Australia/Melbourne
+    volumes:
+      - /docker/sabnzbd:/config
+      - /downloads/incomplete:/incomplete-downloads #optional
+      - /downloads:/downloads #optional
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    network_mode: bridge    
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Australia/Melbourne
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    volumes:
+      - /docker/qbittorrent:/config
+      - /downloads:/downloads #optional
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    stop_grace_period: "10s" #optional
+    restart: unless-stopped
+    
+  pinchflat:
+    container_name: pinchflat
+    network_mode: bridge    
+    image: ghcr.io/kieraneglin/pinchflat:latest
+    environment:
+      - TZ=Australia/Melbourne
+    ports:
+      - '8945:8945'
+    volumes:
+      - /docker/pinchflat:/config
+      - /media/youtube:/downloads
+    restart: unless-stopped
+
+  huntarr:
+    image: huntarr/huntarr:latest
+    container_name: huntarr
+    network_mode: bridge
+    restart: always
+    ports:
+      - "9705:9705"
+    volumes:
+      - /docker/huntarr:/config
+    environment:
+      - TZ=Australia/Melbourne       
+
+  slskd:
+    image: slskd/slskd
+    container_name: slskd
+    network_mode: bridge    
+    ports:
+      - "5030:5030"
+      - "5031:5031"
+      - "50300:50300"
+    environment:
+      - SLSKD_REMOTE_CONFIGURATION=true
+    volumes:
+      - /docker/slskd:/app
+    restart: always
+
+  yt-dlp-webui:
+    image: marcobaobao/yt-dlp-webui
+    ports:
+      - 3033:3033
+    volumes:
+      - /docker/ytdlp:/config
+      - /downloads/ytdlp:/downloads # replace <your dir> with a directory on your host system
+    healthcheck:
+      test: curl -f http://192.168.10.30:3033 || exit 1
+    restart: unless-stopped
