@@ -30,7 +30,7 @@ services:
       - /media:/media #optional
       - /downloads:/downloads #optional
     ports:
-      - 8989:8990
+      - 8990:8989
     restart: unless-stopped    
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -62,7 +62,7 @@ services:
       - /media:/media #optional
       - /downloads:/downloads #optional
     ports:
-      - 7878:7879
+      - 7879:7878
     restart: unless-stopped    
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
@@ -117,4 +117,30 @@ services:
       timeout: 3s
       interval: 15s
       retries: 3
-    restart: unless-stopped    
+    restart: unless-stopped
+  musicseerr:
+    image: ghcr.io/habirabbu/musicseerr:latest
+    container_name: musicseerr
+    environment:
+      - LOG_LEVEL=debug
+      - PUID=0
+      - PGID=0
+      - TZ=Australia/Melbourne
+      - UMASK=002
+      - PORT=8688
+    ports:
+      - "8688:8688"
+    volumes:
+      - /docker/musicseerr:/app/config  # Persistent app configuration
+      - /docker/musicseerr/cache:/app/cache    # Cover art and metadata cache
+      # Optional: mount your music library for local file playback.
+      # The left side should match the root folder Lidarr uses.
+      # The right side (/music) must match "Music Directory Path" in Settings > Local Files.
+      - /media/music:/music:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8688/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 15s
+      retries: 3    
