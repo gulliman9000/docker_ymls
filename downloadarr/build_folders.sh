@@ -14,7 +14,7 @@ mkdir -p "$BASE_DIR"/{sabnzbd,prowlarr,qbittorrent,pinchflat,soularr,slskd,ytdlp
 echo "Downloading docker-compose.yml..."
 
 curl -fsSL "$COMPOSE_URL" -o "$BASE_DIR/docker-compose.yml"
-curl -fsSL "$SOULARR_CONFIG" -o "$BASE_DIR/soularrd/config.ini"
+curl -fsSL "$SOULARR_CONFIG" -o "$BASE_DIR/soularr/config.ini"
 
 echo
 echo "Done!"
