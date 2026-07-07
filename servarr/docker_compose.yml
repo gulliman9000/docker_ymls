@@ -30,7 +30,7 @@ services:
       - /media:/media #optional
       - /downloads:/downloads #optional
     ports:
-      - 8989:8989
+      - 8989:8990
     restart: unless-stopped    
   radarr:
     image: lscr.io/linuxserver/radarr:latest
