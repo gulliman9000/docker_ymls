@@ -100,6 +100,7 @@ services:
     image: ghcr.io/seerr-team/seerr:latest
     init: true
     container_name: seerr
+    network_mode: bridge
     environment:
       - LOG_LEVEL=debug
       - PUID=0
