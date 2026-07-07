@@ -38,13 +38,13 @@ services:
       - PUID=0
       - PGID=0
       - TZ=Australia/Melbourne
-      - WEBUI_PORT=8080
+      - WEBUI_PORT=8181
       - TORRENTING_PORT=6881
     volumes:
       - /docker/qbittorrent:/config
       - /downloads:/downloads #optional
     ports:
-      - 8080:8080
+      - 8181:8181
       - 6881:6881
       - 6881:6881/udp
     stop_grace_period: "10s" #optional
@@ -79,6 +79,8 @@ services:
 
   yt-dlp-webui:
     image: marcobaobao/yt-dlp-webui
+    container_name: yt-dlp-webui
+    network_mode: bridge        
     ports:
       - 3033:3033
     volumes:

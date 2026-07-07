@@ -91,7 +91,7 @@ services:
       - UMASK=002
     volumes:
       - /docker/sportarr:/config
-      - /media/Sportsing:/data #optional
+      - /media:/media #optional
       - /downloads:/downloads #optional
     ports:
       - 1867:1867
