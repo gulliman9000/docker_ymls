@@ -93,7 +93,9 @@ services:
       - SLSKD_REMOTE_CONFIGURATION=true
     volumes:
       - /docker/slskd:/app
-      - /media:/data
+      - /downloads/slskd/incomplete:/app/incomplete
+      - /downloads/slskd:/app/downloads
+      - /media/music:/music:ro
     restart: always
 
   yt-dlp-webui:
