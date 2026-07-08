@@ -8,7 +8,21 @@ COMPOSE_URL="https://raw.githubusercontent.com/gulliman9000/docker_ymls/main/ser
 
 echo "Creating directory structure..."
 
-mkdir -p "$BASE_DIR"/{sonarr,radarr,sonarr4k,radarr4k,lidarr,sportarr,seerr,musicseerr,musicseerr/cache}
+mkdir -p "$BASE_DIR"/{ \
+    sonarr, \
+    radarr, \
+    sonarr4k, \
+    radarr4k, \
+    lidarr, \
+    sportarr, \
+    seerr, \
+    musicseerr, \
+    musicseerr/cache, \
+    configarr, \
+    configarr/dockerrepos, \
+    configarr/cfs, \
+    configarr/templates \
+    }
 
 echo "Downloading docker-compose.yml..."
 
