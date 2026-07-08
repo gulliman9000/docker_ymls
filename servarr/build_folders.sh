@@ -28,6 +28,8 @@ for dir in "${DIRS[@]}"; do
     mkdir -p "$BASE_DIR/$dir"
 done
 
+chown -R 1000:1000 "$BASE_DIR"    
+
 echo "Downloading docker-compose.yml..."
 
 curl -fsSL "$COMPOSE_URL" -o "$BASE_DIR/docker-compose.yml"
