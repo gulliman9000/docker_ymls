@@ -189,3 +189,16 @@ services:
       - /docker/configarr/cfs:/app/cfs # Optional if custom formats locally provided
       - /docker/configarr/templates:/app/templates # Optional if custom templates
     # restart: "no" # optional make sure this is set to no or removed. Default is no      
+    
+  questarr:
+    image: ghcr.io/doezer/questarr:latest
+    container_name: questarr
+    network_mode: bridge    
+    ports:
+      - "5000:5000"
+    volumes:
+      - /docker/questarr:/app/data
+      - /media:/media
+    environment:
+      - SQLITE_DB_PATH=/app/data/sqlite.db
+    restart: unless-stopped

@@ -22,6 +22,7 @@ DIRS=(
     "configarr/dockerrepos"
     "configarr/cfs"
     "configarr/templates"
+    "questarr"
 )
 
 for dir in "${DIRS[@]}"; do
